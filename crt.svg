@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 600" width="1000" height="600" font-family="'Courier New', Courier, monospace">
+  <defs>
+    <!-- Lueur de l'écran -->
+    <radialGradient id="screenGlow" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1f5a2a"/>
+      <stop offset="65%" stop-color="#103a18"/>
+      <stop offset="100%" stop-color="#05160a"/>
+    </radialGradient>
+    <!-- Vignette (coins sombres de l'écran bombé) -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+      <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.75"/>
+    </radialGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b2f2b"/>
+      <stop offset="100%" stop-color="#121412"/>
+    </linearGradient>
+    <!-- Bande lumineuse qui défile -->
+    <linearGradient id="rollBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b6ffb0" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#b6ffb0" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#b6ffb0" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Lignes de balayage -->
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#000" fill-opacity="0.28"/>
+    </pattern>
+    <!-- Glow phosphore sur le texte -->
+    <filter id="phosphor" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="screenClip"><rect x="40" y="40" width="920" height="520" rx="38"/></clipPath>
+
+    <style>
+      .t   { fill: #b9ff9e; font-size: 21px; }
+      .k   { fill: #7fe07a; }
+      .big { fill: #e9ffd9; font-size: 34px; font-weight: bold; letter-spacing: 3px; }
+      .dim { fill: #6fbf6a; font-size: 17px; }
+      .flicker { animation: flicker 4s infinite steps(1); }
+      @keyframes flicker {
+        0%{opacity:1} 3%{opacity:.86} 6%{opacity:1} 41%{opacity:.93} 42%{opacity:1}
+        77%{opacity:.88} 78%{opacity:1}
+      }
+      .roll { animation: roll 6s linear infinite; }
+      @keyframes roll { from { transform: translateY(-140px) } to { transform: translateY(620px) } }
+      .cursor { animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0 } }
+      .boot { animation: boot 1.2s ease-out both; transform-origin: 500px 300px; }
+      @keyframes boot {
+        0%   { transform: scale(1, 0.004); filter: brightness(4); }
+        45%  { transform: scale(1, 0.004); filter: brightness(4); }
+        70%  { transform: scale(1, 1.06); }
+        100% { transform: scale(1, 1); filter: brightness(1); }
+      }
+    </style>
+  </defs>
+
+  <!-- Boîtier -->
+  <rect x="0" y="0" width="1000" height="600" rx="46" fill="url(#bezel)"/>
+  <rect x="30" y="30" width="940" height="540" rx="42" fill="#050805"/>
+
+  <g clip-path="url(#screenClip)">
+    <g class="boot">
+      <g class="flicker">
+        <rect x="40" y="40" width="920" height="520" fill="url(#screenGlow)"/>
+
+        <!-- Portrait pixel art -->
+        <rect x="70" y="70" width="440" height="440" fill="#0a1f0e"/>
+        <image x="70" y="70" width="440" height="440" preserveAspectRatio="none"
+               style="image-rendering: pixelated; image-rendering: crisp-edges"
+               xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAA0CSURBVHhe7ZvLrWVJEUVrzAALkJAwBDHGGEzAAizBDoaY0CYwwINGgbRLW+tG5Of8Ms9VD1bvm5mRv9gn7nmvqvrH7/74+1//8Nc//fqbfqf+iP/8xvfy02A5frZN7Y3/pm0V7B/Vr65gXpZU/d/EDybhG1REO/jzP/7yE7VdnWy9N+tXVbAuFfz933/7SRgpzYj4zOxv4OMd3NO748+oDKOZmcl+thbZPitVsL/Sr6lgGViZO2Mq12Xfm3j9OzigqY5iArZH8Xncf3d9dQWzQoliiPq5HtfO9G1038Ecn21frYLmqi9rH30HZ+tpjOc6qr31zo6/soJpVob/FM13M9fj2lKuMzJ/N17zDhY0V31SH6/iHK7PvRxfj+fbVV9VwUyy+qSVucTnVXAO1+/N34WPd/DZNrU3PqJVcpl8x8ezea4V2fxsHZ53J926guOQSvBIZTL5mtebz301X+prcV41fxe2fgd7cqUxFrSSnM3LlPMquB7nRTs7/w66ZQXH4ZRQVmCF5tKMTPWZ+zpcPzsD45XUnfh4B1M5Ptum9sZlrifVDWHifU32M5Zr9fB5rtU+Or+rYP9T41tWsBv7r//+M01slWRvez8fFsZV+HzO83aMc+4ObPUODnpmsO1KOC9bj3Oy+d6u5qs/u9dK3a6CVbH+tRj9reSync3jQ9MzO2szPmvHZyV3Bz7ewavaAU1owbkiG1ffmXV9HcVxjh6qgPdjZT2l21SwDGAFC7Y9yVIm3Pu9clnJ3I/zuU52Ft+D5q5k2TuYtJLtSVSb6uO+JsezfbhfNV9z/Ac/jofGHXnfVbpNBTNxWZVEXKutPvVn475+ZXLVjvP959df/q+Bj/k6Su4ObPEO9gR6soIYj7bivJ/tCo/TXlm7Ml19Ya6QwTofz1Ldl9obP6vLK1hJUVV4kn2cZmRw3Ww+8f0CniEzV3ANfeYdV7LsHSwNlFhVhZuomKzfjVJchsdTA+2dPWQ6G81VnM7Ps/Geq3R5BQdKoie1MkNJ7Zmbzc9UptK4lrnCz0KDd2H5OzgSoqR6cj3WzfQkjiaT8a4yx02TWTS/quDsbKykVbq8gquvRprQQnEzyr38DN6msY6vuW0F0/EnVYlhsr0ypMTHj6I9/eHS/j2DYyxidQ+am913hS6rYCUkS7IS7XFMYtbm+i3VHv4NovViTCbSWDeY+wkldwceewc7nmw3NTNYccTXqWCcGyhD/eHSeM/cIOKrfQLen5X11PjjFcxkeCVlBivpLbJ1Oa51vWLZjtjok8GM05gM9iRzv11Y+g4OVVLdWK8mojmuFR5HMx0ZqhgZmOHnq/YLeM9V+ngFO3EIT36WxIyYm7VdfX587n3teoW62UTmu5l+Ht2Ld13FxzuYyvE72jIhEqjPbqC3FZ8p19McN6dCD5cbnJ1D+H6+L++3WpdWsHATlNRMFUvUL3VzRsyVqYrzs4ho+z6k6l/NY+9gwf5QmaIKdmNJzKlUuMGhNDPDHwI3W+fS2Xwf4WfL7rdSX1PBbiZRv9QNppFH8ErO9vNz7MbHO3hFW6a4wU70Ka6ngapNa9KwjFacHr7qa5ptv99ZPbve8gqmuTSY7R5ebQHNOoNXsJ+ffTvx2Du4UjexZaZiK3Vkrr9LSWusQt8kws/Ge+2iyyqYprg57FMSs89sj5jrhimWYxnZfmrvysc7mMrxs+3QzLygMldm0URPtpQG98wbja/24/3YXq3LKljQtMxkJd37GKe2V2RllhMxvi/HFcMzCd5nN5a9g50Rk1z5INBsr8ReZbqJ7PP9dE4/b8B77aaPVjA3D9wkh0lmW8hcr7Jsvj8YeoC4bobW5UMkszP8fqv5eAdf3Q4VXgFSJzMg+jVfhsis+KzEa54+0zw+FA7jPD47Z2YuH95d9NYK1iaRECaYiVbiOO4HjnFPvlcY57ESM/Oqh0LjOjtRP++7I7e+gz1xSqRv7slSrM8JYh3h/TIj+rRGy2Q31dWN9rX9XDTXye69k95SwbG4V0RmbguZo2S76axgN5gmKYZGy1CPZ+X6mpW5b+CSd7BfXua6ST5vBJ8rE3oG6xweQ3MdGqw9/Bwylv1BlY9Z7c0/O36qgmMRPuH6rAR7P+d7v4/LYEGz3ETu7w9CD67jZ6K51fl359Q7OC6tZHHhIDOPT16FVzFViffkC51r1GRfx8/t5jpZHnbWwxUcC3ilRV+WFFUY52fmc57WdrN8nsxxg2dMzs7m5voY4xwlc0e672Cqj0cSVFHR9urK4vW5Z67G3NxQfZWGRoz6fD03WX2KczRHD4Pv6w8N7yGYl131cAV7MtVW8t1gmujxUk+40FqZydrDza7Oxf6qMn1ccL6338Lhd3BFltwWMo/rxho0VW0m3+ewT2Tnd3OlDuOzdXbXUxXcahMlTQYpXu9Cj43DqTplrJvte2UmzZzHz+Lm9ua/hY93MLUaP4ISKkN7ydTD4FVcxTr8Gq7g/qFxv2wu718p49mm9sZ72pt/uIJnyZLWI+a4uRzL2qHZtwJjfTx7yGQ2576Nw+9g6lX4uvrsyZY5mSmBKl6xHCc8f9V+q15SwZ50jlXMxOqwmkd8PX2Nc7xaL2t/E9138Ki2EkqyGK7HpLOdrRfq7+nWmbhe1X67XlLBAasmS6ri+P5jzAg+T/tVP8Bl52H7W7n0HcykRdvHqziH62bru6HZupUSf61wv2/RSypYiwW9pPbGKmQq1+daHpeRrcu+b6L7Du6NUytiPIiERuX04mfwr+URJVk/73VUe+udHe/pJRU8Smw6+tN2FUOz9GuR94/CtR1+/b+Vy97BVOH9kdQqcZzH/mo8oOlZv5vqcdW6ftaI4Tneoo9WsCeNZsxCkzITe3DNDI9V0t7Ebe9gb8cfHY4mlPOpGTTMTaZ6LM/ENtcPeJ7d9dYKjk0iKfqzYW3qMKmefH+/0hRp6x3MNuH+8bl6hficN3HbO9jNHP3Byol4/W2S5mdruCnZuPppKtuck+FxvOeuemsFCyUzNq2MIoyhGUw2+zOtaD2A/nAJxuzMRwUL9o+OUwNPSpUkrj9D9bUqMpO9v2Uw57sGvC+1F3d2vKePVHBQJbDqD+KQQm3G8O+KaYKbWsE47sH1RuJ34aOC71IlIjOpQu/f6l90aJzzSGaOqz7zHxVwDc6jBrz3al1ewRURL3Nds6RyHvu8X0Y52Tw+PNm7mPP1WcndgdsruKI3PkLv3SloQmUq5/hP5z0Yxzys0m0rOEOHDlTVvXU9+TPq84/Cs6zg9gp2U/zS2bgI8zhPX5lag1+hLTTnSNJpWg/O4T2f1kcqWJsdIZKUvYN75nqyXQnHM5MyRt/JwZn7n2W6ggX7Z8dJNR79Qm0lmLEzxDr8FYu4md4egfHMA+/L/tHxnj5SwTN4cjjmeNJb8RynEVm/1o/PVFL1E57rKaYr+KySbFwJqZRxozDp+tqPMb3T4xyMOwPPyfverY9XsF82w5OSJanVP7O+PofJ+v+esj0qepXtcN8nebyCdVG1hbc9KZ6YK5Pm59IPcdx3lJbJWi/b9wl9tIJjU794hidlFM7L1vM12e+wMqmE/Ww73OsJHq/gwC/r/URxPWV8hVepjPC5d8DzMh9366MVPEOWnBnt4fEjsDJZ2Rx3eK7WQ301l1ewYD91Biap0qNwHdcRRs2VBsxHpbPx1G0rWHhSvM3+apxx7KchPWgm2xncj2e+k8sreFZ7RJwnagbOYZJdaUbV7sF1s/0D5uEuXV7BTEJGxESlsI9x2XhLacrVcL+Rc1/N9hUsWvFM3hE9C9fjGZ0YZx7u0qUV3DKtgoltwXi270b7ZfoU21Vw1R94kphEtmeV82fhejx71c98XK1LK9jJLp+Nu1ZwnPMqPQrXca3O/xTTFSzYf2Z89tKerJEkc332Z+s52a9CnJdpRYwzL5UK9o/q9hXMpGU6ymz8LDxXS59iuoLv0hmYrJEk98apo3Aez1rB+9+l21VwlSSOZ7oKnmNEnSMP+SinK1iwf2Y8u3QLJqulpBpnexSu58rzOszDXbpFBXuyvI9x3u86y9F5PXiuTJ/mdAVfoXF5/aSq/hGYvJa6Cdl8H/d2D66Tre9k979Tt6jgMLf1z1czmNRMK3rjGdmvShU8h2vGzEOd0Zr/eAULb/u/bszGezCJrkx61T4K92tpwHzcrUsrOA4Rl88MFp6cVtu1x2jcLDxHpk/zeAW7BnHx7OtZcTMwmTM6CuO5jmtGloc7dWkFXwmTmylNuQvu63oFfPhb7dMVzEWpvXHGVfFnYJJbOgrjuU62f8B73a2vqWAmrYJJzsygKVfB/TK9k6wYTlfwVSrYz/EZmNwZrWBcS4n383536RYVHIfJLj8Dk5tpZdJZuF6l4sj9WrTWe7yCRdU/Mq6kVWTJHVXBNvtHlOdxeK/R9qxuUcFBloQMJjFTmlHRGz8Kz+P6NP8DUwrT4V70bR8AAAAASUVORK5CYII=" href="data:image/png;base64,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"/>
+
+        <!-- Infos -->
+        <g filter="url(#phosphor)">
+          <text x="545" y="112" class="big">CHIRINE HAMMAR<animate attributeName="opacity" values="0;0;1" keyTimes="0;0.5;1" dur="1.6s" fill="freeze"/></text>
+          <text x="547" y="142" class="dim">&gt; Étudiante BTS SIO · option SISR</text>
+
+          <g class="t">
+            <!-- Chaque ligne s'écrit comme à la machine -->
+            <clipPath id="l1"><rect x="540" y="160" width="0" height="34"><animate attributeName="width" from="0" to="420" begin="1.4s" dur="0.6s" fill="freeze" calcMode="discrete" values="0;60;120;180;240;300;360;420"/></rect></clipPath>
+            <text x="547" y="186" clip-path="url(#l1)"><tspan class="k">Nom:</tspan> Chirine Hammar</text>
+
+            <clipPath id="l2"><rect x="540" y="196" width="0" height="34"><animate attributeName="width" begin="2.0s" dur="0.4s" fill="freeze" calcMode="discrete" values="0;80;160;240;420"/></rect></clipPath>
+            <text x="547" y="222" clip-path="url(#l2)"><tspan class="k">Âge:</tspan> 20 ans</text>
+
+            <clipPath id="l3"><rect x="540" y="232" width="0" height="34"><animate attributeName="width" begin="2.4s" dur="0.5s" fill="freeze" calcMode="discrete" values="0;80;160;240;320;420"/></rect></clipPath>
+            <text x="547" y="258" clip-path="url(#l3)"><tspan class="k">École:</tspan> MyDigitalSchool</text>
+
+            <clipPath id="l4"><rect x="540" y="268" width="0" height="34"><animate attributeName="width" begin="2.9s" dur="0.4s" fill="freeze" calcMode="discrete" values="0;100;200;300;420"/></rect></clipPath>
+            <text x="547" y="294" clip-path="url(#l4)"><tspan class="k">OS:</tspan> Windows</text>
+
+            <clipPath id="l5"><rect x="540" y="304" width="0" height="34"><animate attributeName="width" begin="3.3s" dur="0.4s" fill="freeze" calcMode="discrete" values="0;100;200;300;420"/></rect></clipPath>
+            <text x="547" y="330" clip-path="url(#l5)"><tspan class="k">Formation:</tspan> BTS SIO</text>
+
+            <clipPath id="l6"><rect x="540" y="340" width="0" height="64"><animate attributeName="width" begin="3.7s" dur="0.7s" fill="freeze" calcMode="discrete" values="0;70;140;210;280;350;420"/></rect></clipPath>
+            <text x="547" y="366" clip-path="url(#l6)"><tspan class="k">Option:</tspan> SISR</text>
+            <text x="648" y="394" clip-path="url(#l6)" class="dim">(Systèmes &amp; Réseaux)</text>
+
+            <clipPath id="l7"><rect x="540" y="404" width="0" height="64"><animate attributeName="width" begin="4.4s" dur="0.7s" fill="freeze" calcMode="discrete" values="0;70;140;210;280;350;420"/></rect></clipPath>
+            <text x="547" y="430" clip-path="url(#l7)"><tspan class="k">Skills:</tspan> Réseaux, Linux,</text>
+            <text x="648" y="458" clip-path="url(#l7)">Cisco, Cybersécurité</text>
+          </g>
+
+          <!-- Palette de couleurs façon neofetch -->
+          <g opacity="0">
+            <animate attributeName="opacity" begin="5.1s" dur="0.3s" to="1" fill="freeze"/>
+            <rect x="547" y="478" width="34" height="22" fill="#1c4a22"/>
+            <rect x="581" y="478" width="34" height="22" fill="#d9822b"/>
+            <rect x="615" y="478" width="34" height="22" fill="#33d16b"/>
+            <rect x="649" y="478" width="34" height="22" fill="#e6e65a"/>
+            <rect x="683" y="478" width="34" height="22" fill="#3fbf8f"/>
+            <rect x="717" y="478" width="34" height="22" fill="#c06a8a"/>
+            <rect x="751" y="478" width="34" height="22" fill="#2fe07a"/>
+            <rect x="785" y="478" width="34" height="22" fill="#a8f0a0"/>
+            <rect x="547" y="500" width="34" height="22" fill="#5fae5c"/>
+            <rect x="581" y="500" width="34" height="22" fill="#e9c97a"/>
+            <rect x="615" y="500" width="34" height="22" fill="#8fe08a"/>
+            <rect x="649" y="500" width="34" height="22" fill="#f4f47a"/>
+            <rect x="683" y="500" width="34" height="22" fill="#8fe0b8"/>
+            <rect x="717" y="500" width="34" height="22" fill="#e8d0d8"/>
+            <rect x="751" y="500" width="34" height="22" fill="#c8f8d8"/>
+            <rect x="785" y="500" width="34" height="22" fill="#eaffe4"/>
+          </g>
+
+          <!-- Prompt -->
+          <text x="72" y="542" class="t">chirine@github:~$ <tspan class="cursor">█</tspan></text>
+        </g>
+
+        <!-- Effets CRT -->
+        <rect x="40" y="40" width="920" height="520" fill="url(#scan)"/>
+        <rect class="roll" x="40" y="40" width="920" height="120" fill="url(#rollBar)"/>
+        <rect x="40" y="40" width="920" height="520" fill="url(#vignette)"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Reflet sur la vitre -->
+  <path d="M80 60 Q 500 30 920 60 L 900 110 Q 500 80 100 110 Z" fill="#ffffff" fill-opacity="0.035"/>
+</svg>
